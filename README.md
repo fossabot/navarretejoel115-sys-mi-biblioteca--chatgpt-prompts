@@ -1,3 +1,4 @@
+https://prompts.chat/
 # 🧠 Awesome ChatGPT Prompts
 from openai.types import (
     AllModels,

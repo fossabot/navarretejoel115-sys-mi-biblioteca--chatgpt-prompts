@@ -70,3 +70,9 @@ This project contains some [ChatGPT](https://chat.openai.com/chat) prompts that 
     with:
       name: build
       path: ./build  # ajusta según tu carpeta de salida (p. ej. build, public, .svelte-kit)
+
+
+  - git clone git@github.com:navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts.git
+cd navarretejoel115-sys-mi-biblioteca--chatgpt-prompts
+
+

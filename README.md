@@ -152,3 +152,4 @@ Dime ahora:
 - Si empiezas ahora, ejecuta los pasos y, si aparece un error, pega aquí la salida del comando/step que falló (siguiendo lo indicado) y lo depuramos juntos.
 
 
+✔️ confirmando 

@@ -75,4 +75,80 @@ This project contains some [ChatGPT](https://chat.openai.com/chat) prompts that 
   - git clone git@github.com:navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts.git
 cd navarretejoel115-sys-mi-biblioteca--chatgpt-prompts
 
+Perfecto — vamos a aplicar todo localmente. Sigue los pasos exactamente y, si algo falla, copia/pega aquí las salidas (logs) que te indico para ayudarte a depurar.
+
+Antes de empezar: asegúrate de tener en tu máquina
+- git, Node.js (>=18), pnpm, gh (opcional), ffmpeg instalado.
+- Autenticación gh si vas a crear PR con gh: gh auth login
+
+1) Clona el repo (si aún no lo hiciste)
+git clone git@github.com:navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts.git
+cd navarretejoel115-sys-mi-biblioteca--chatgpt-prompts
+
+2) Opción A — si tienes apply_scaffold.patch (recomendado)
+- Guarda el archivo apply_scaffold.patch en la raíz del repo.
+- Aplica el patch:
+  git apply apply_scaffold.patch || git apply --whitespace=fix apply_scaffold.patch
+- Revisa cambios:
+  git status
+- Añade y commitea:
+  git add .
+  git commit -m "feat: add media pipeline, translate/tts, workflow and content license"
+- Crea la rama y haz push:
+  git checkout -b feat/navarrete115-biblioteca-scaffold
+  git push --set-upstream origin feat/navarrete115-biblioteca-scaffold
+- (Opcional) Crea PR con gh:
+  gh pr create --repo navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts --base main --head navarretejoel115-sys:feat/navarrete115-biblioteca-scaffold --title "feat: NAVARRETE115-biblioteca scaffold + media pipeline" --body "Scaffold + media pipeline + CC BY-SA license"
+
+3) Opción B — si prefieres ejecutar el script safe (si existe create_scaffold.sh)
+- Haz ejecutable y ejecútalo:
+  chmod +x create_scaffold.sh
+  ./create_scaffold.sh
+  # El script intentará crear la rama, commitear, push y crear PR con gh si está autenticado.
+
+4) Instala dependencias y herramientas locales
+- Instala pnpm y deps:
+  npm i -g pnpm
+  pnpm install -w
+  pnpm add -w gtts node-fetch
+- Instala ffmpeg (ejemplo en Ubuntu):
+  sudo apt update && sudo apt install -y ffmpeg
+
+5) Genera y prueba localmente (haz pruebas pequeñas primero)
+- Generar los devocionales (si no están):
+  node scripts/generate-devotionals.js
+- Probar la generación de media para 3 entradas:
+  node scripts/generate_media.js 3
+- Comprueba artifacts/ contiene .mp3, .srt, .mp4
+
+6) Si algo falla localmente — qué pegar aquí
+Para errores en comandos locales (por ejemplo node o ffmpeg), pega:
+- El comando exacto que ejecutaste.
+- Las últimas ~80 líneas completas de la salida de la terminal (incluyendo el mensaje de error).
+Ejemplo: pega el output de:
+  node scripts/generate_media.js 3
+o
+  git apply apply_scaffold.patch
+
+7) Si falla en GitHub Actions — cómo traer logs
+- Lista runs:
+  gh run list --repo navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts
+- Ver logs (sustituye RUN_ID):
+  gh run view RUN_ID --repo navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts --log
+- Pega aquí:
+  - URL del run o RUN_ID
+  - Nombre del step que falló
+  - Últimas ~50 líneas del log del step (sin secrets)
+
+8) Comprobaciones rápidas (por si fallan cosas frecuentes)
+- gh no autenticado: gh auth login
+- ffmpeg no encontrado: sudo apt install -y ffmpeg (o ver PATH)
+- gtts falta: pnpm add -w gtts
+- aws-cli falta en workflow: Actions instala awscli via pip en el workflow (ya incluido)
+- R2 upload AccessDenied: revisa CF_R2_ACCESS_KEY_ID / SECRET y R2_ENDPOINT
+
+Dime ahora:
+- Confirmas que vas a usar Opción A (apply_scaffold.patch) o B (create_scaffold.sh)?  
+- Si empiezas ahora, ejecuta los pasos y, si aparece un error, pega aquí la salida del comando/step que falló (siguiendo lo indicado) y lo depuramos juntos.
+
 

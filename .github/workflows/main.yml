@@ -1,2 +1,77 @@
+Perfecto — vamos a aplicar todo localmente. Sigue los pasos exactamente y, si algo falla, copia/pega aquí las salidas (logs) que te indico para ayudarte a depurar.
+
+Antes de empezar: asegúrate de tener en tu máquina
+- git, Node.js (>=18), pnpm, gh (opcional), ffmpeg instalado.
+- Autenticación gh si vas a crear PR con gh: gh auth login
+
+1) Clona el repo (si aún no lo hiciste)
+git clone git@github.com:navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts.git
+cd navarretejoel115-sys-mi-biblioteca--chatgpt-prompts
+
+2) Opción A — si tienes apply_scaffold.patch (recomendado)
+- Guarda el archivo apply_scaffold.patch en la raíz del repo.
+- Aplica el patch:
+  git apply apply_scaffold.patch || git apply --whitespace=fix apply_scaffold.patch
+- Revisa cambios:
+  git status
+- Añade y commitea:
+  git add .
+  git commit -m "feat: add media pipeline, translate/tts, workflow and content license"
+- Crea la rama y haz push:
+  git checkout -b feat/navarrete115-biblioteca-scaffold
+  git push --set-upstream origin feat/navarrete115-biblioteca-scaffold
+- (Opcional) Crea PR con gh:
+  gh pr create --repo navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts --base main --head navarretejoel115-sys:feat/navarrete115-biblioteca-scaffold --title "feat: NAVARRETE115-biblioteca scaffold + media pipeline" --body "Scaffold + media pipeline + CC BY-SA license"
+
+3) Opción B — si prefieres ejecutar el script safe (si existe create_scaffold.sh)
+- Haz ejecutable y ejecútalo:
+  chmod +x create_scaffold.sh
+  ./create_scaffold.sh
+  # El script intentará crear la rama, commitear, push y crear PR con gh si está autenticado.
+
+4) Instala dependencias y herramientas locales
+- Instala pnpm y deps:
+  npm i -g pnpm
+  pnpm install -w
+  pnpm add -w gtts node-fetch
+- Instala ffmpeg (ejemplo en Ubuntu):
+  sudo apt update && sudo apt install -y ffmpeg
+
+5) Genera y prueba localmente (haz pruebas pequeñas primero)
+- Generar los devocionales (si no están):
+  node scripts/generate-devotionals.js
+- Probar la generación de media para 3 entradas:
+  node scripts/generate_media.js 3
+- Comprueba artifacts/ contiene .mp3, .srt, .mp4
+
+6) Si algo falla localmente — qué pegar aquí
+Para errores en comandos locales (por ejemplo node o ffmpeg), pega:
+- El comando exacto que ejecutaste.
+- Las últimas ~80 líneas completas de la salida de la terminal (incluyendo el mensaje de error).
+Ejemplo: pega el output de:
+  node scripts/generate_media.js 3
+o
+  git apply apply_scaffold.patch
+
+7) Si falla en GitHub Actions — cómo traer logs
+- Lista runs:
+  gh run list --repo navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts
+- Ver logs (sustituye RUN_ID):
+  gh run view RUN_ID --repo navarretejoel115-sys/navarretejoel115-sys-mi-biblioteca--chatgpt-prompts --log
+- Pega aquí:
+  - URL del run o RUN_ID
+  - Nombre del step que falló
+  - Últimas ~50 líneas del log del step (sin secrets)
+
+8) Comprobaciones rápidas (por si fallan cosas frecuentes)
+- gh no autenticado: gh auth login
+- ffmpeg no encontrado: sudo apt install -y ffmpeg (o ver PATH)
+- gtts falta: pnpm add -w gtts
+- aws-cli falta en workflow: Actions instala awscli via pip en el workflow (ya incluido)
+- R2 upload AccessDenied: revisa CF_R2_ACCESS_KEY_ID / SECRET y R2_ENDPOINT
+
+Dime ahora:
+- Confirmas que vas a usar Opción A (apply_scaffold.patch) o B (create_scaffold.sh)?  
+- Si empiezas ahora, ejecuta los pasos y, si aparece un error, pega aquí la salida del comando/step que falló (siguiendo lo indicado) y lo depuramos juntos. Autorizo .
  gh pr create --base main --title "feat: NAVARRETE115-biblioteca scaffold" --body "Scaffold: pnpm workspace, packages/library (TS), packages/devotionals (66), CI/workflows, dependabot, husky, README, PRIVACY.md"
 PyPI recent updates for openai https://pypi.org/project/openai/ Recent updates to the Python Package Index for openai en 2.14.0 https://pypi.org/project/openai/2.14.0/ The official Python library for the openai API support@openai.com Fri, 19 Dec 2025 03:28:43 GMT 2.13.0 https://pypi.org/project/openai/2.13.0/ The official Python library for the openai API support@openai.com Tue, 16 Dec 2025 18:19:43 GMT 2.12.0 https://pypi.org/project/openai/2.12.0/ The official Python library for the openai API support@openai.com Mon, 15 Dec 2025 16:17:13 GMT 2.11.0 https://pypi.org/project/openai/2.11.0/ The official Python library for the openai API support@openai.com Thu, 11 Dec 2025 19:11:56 GMT 2.9.0 https://pypi.org/project/openai/2.9.0/ The official Python library for the openai API support@openai.com Thu, 04 Dec 2025 18:15:07 GMT 2.8.1 https://pypi.org/project/openai/2.8.1/ The official Python library for the openai API support@openai.com Mon, 17 Nov 2025 22:39:57 GMT 2.8.0 https://pypi.org/project/openai/2.8.0/ The official Python library for the openai API support@openai.com Thu, 13 Nov 2025 18:15:23 GMT 2.7.2 https://pypi.org/project/openai/2.7.2/ The official Python library for the openai API support@openai.com Mon, 10 Nov 2025 16:42:28 GMT 2.7.1 https://pypi.org/project/openai/2.7.1/ The official Python library for the openai API support@openai.com Tue, 04 Nov 2025 06:07:20 GMT 2.7.0 https://pypi.org/project/openai/2.7.0/ The official Python library for the openai API support@openai.com Mon, 03 Nov 2025 23:52:05 GMT 2.6.1 https://pypi.org/project/openai/2.6.1/ The official Python library for the openai API support@openai.com Fri, 24 Oct 2025 13:29:50 GMT 2.6.0 https://pypi.org/project/openai/2.6.0/ The official Python library for the openai API support@openai.com Mon, 20 Oct 2025 17:17:22 GMT 2.5.0 https://pypi.org/project/openai/2.5.0/ The official Python library for the openai API support@openai.com Fri, 17 Oct 2025 18:14:45 GMT 2.4.0 https://pypi.org/project/openai/2.4.0/ The official Python library for the openai API support@openai.com Thu, 16 Oct 2025 15:14:02 GMT 2.3.0 https://pypi.org/project/openai/2.3.0/ The official Python library for the openai API support@openai.com Fri, 10 Oct 2025 01:12:48 GMT 2.2.0 https://pypi.org/project/openai/2.2.0/ The official Python library for the openai API support@openai.com Mon, 06 Oct 2025 18:08:11 GMT 2.1.0 https://pypi.org/project/openai/2.1.0/ The official Python library for the openai API support@openai.com Thu, 02 Oct 2025 20:43:13 GMT 2.0.1 https://pypi.org/project/openai/2.0.1/ The official Python library for the openai API support@openai.com Wed, 01 Oct 2025 19:49:07 GMT 2.0.0 https://pypi.org/project/openai/2.0.0/ The official Python library for the openai API support@openai.com Tue, 30 Sep 2025 17:35:54 GMT 1.109.1 https://pypi.org/project/openai/1.109.1/ The official Python library for the openai API support@openai.com Wed, 24 Sep 2025 13:00:50 GMT 1.109.0 https://pypi.org/project/openai/1.109.0/ The official Python library for the openai API support@openai.com Tue, 23 Sep 2025 16:59:39 GMT 1.108.2 https://pypi.org/project/openai/1.108.2/ The official Python library for the openai API support@openai.com Mon, 22 Sep 2025 23:47:36 GMT 1.108.1 https://pypi.org/project/openai/1.108.1/ The official Python library for the openai API support@openai.com Fri, 19 Sep 2025 16:52:18 GMT 1.108.0 https://pypi.org/project/openai/1.108.0/ The official Python library for the openai API support@openai.com Wed, 17 Sep 2025 22:03:20 GMT 1.107.3 https://pypi.org/project/openai/1.107.3/ The official Python library for the openai API support@openai.com Mon, 15 Sep 2025 20:09:18 GMT 1.107.2 https://pypi.org/project/openai/1.107.2/ The official Python library for the openai API support@openai.com Fri, 12 Sep 2025 19:52:19 GMT 1.107.1 https://pypi.org/project/openai/1.107.1/ The official Python library for the openai API support@openai.com Wed, 10 Sep 2025 15:04:37 GMT 1.107.0 https://pypi.org/project/openai/1.107.0/ The official Python library for the openai API support@openai.com Mon, 08 Sep 2025 19:25:45 GMT 1.106.1 https://pypi.org/project/openai/1.106.1/ The official Python library for the openai API support@openai.com Thu, 04 Sep 2025 18:17:13 GMT 1.106.0 https://pypi.org/project/openai/1.106.0/ The official Python library for the openai API support@openai.com Thu, 04 Sep 2025 13:37:34 GMT 1.105.0 https://pypi.org/project/openai/1.105.0/ The official Python library for the openai API support@openai.com Wed, 03 Sep 2025 14:14:06 GMT 1.104.2 https://pypi.org/project/openai/1.104.2/ The official Python library for the openai API support@openai.com Tue, 02 Sep 2025 21:42:28 GMT 1.104.1 https://pypi.org/project/openai/1.104.1/ The official Python library for the openai API support@openai.com Tue, 02 Sep 2025 19:59:36 GMT 1.104.0 https://pypi.org/project/openai/1.104.0/ The official Python library for the openai API support@openai.com Tue, 02 Sep 2025 18:32:07 GMT 1.103.0 https://pypi.org/project/openai/1.103.0/ The official Python library for the openai API support@openai.com Tue, 02 Sep 2025 14:03:09 GMT 1.102.0 https://pypi.org/project/openai/1.102.0/ The official Python library for the openai API support@openai.com Tue, 26 Aug 2025 20:50:27 GMT 1.101.0

@@ -2,7 +2,7 @@ GitHub Copilot Chat Assistant
 
  PRs desde aquí, pero preparé un script que hace TODO en tu máquina: crea los archivos (scaffold), genera las 66 entradas (.md + .json), crea la rama, commitea, hace push y crea el PR usando gh CLI. Revisa el script antes de ejecutarlo y asegúrate de estar en la raíz del repo clonado (navarretejoel115-sys/mi-repo) y de tener git, Node.js, pnpm y gh instalados y autenticados.
 
-Copia este archivo como create_scaffold.sh, dale permisos y ejecútalo.
+  Copia este archivo como create_scaffold.sh, dale permisos y ejecútalo.
 
 === create_scaffold.sh ===
 #!/usr/bin/env bash

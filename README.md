@@ -6,6 +6,8 @@ GitHub Copilot Chat Assistant
 
 === create_scaffold.sh ===
 #!/usr/bin/env bash
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnavarretejoel115-sys%2Fnavarretejoel115-sys-mi-biblioteca--chatgpt-prompts.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnavarretejoel115-sys%2Fnavarretejoel115-sys-mi-biblioteca--chatgpt-prompts?ref=badge_shield)
+
 set -euo pipefail
 
 # Configura valores (edítalos si necesitas)
@@ -681,3 +683,5 @@ Dime ahora:
 
 
 ✔️ confirmando 
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnavarretejoel115-sys%2Fnavarretejoel115-sys-mi-biblioteca--chatgpt-prompts.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnavarretejoel115-sys%2Fnavarretejoel115-sys-mi-biblioteca--chatgpt-prompts?ref=badge_large)
